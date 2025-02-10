@@ -14,10 +14,24 @@ class Draw{
         let dpoly = []
         dpoly.push(poly[0])
         for (const point of poly.slice(1)) {
-            if(point[1]<0.1)
-                point[1] = 0.01
-            let aX = Math.tan(Math.atan((point[0])/(point[1]))) * 400
-            let aY = Math.tan(Math.atan((point[2])/(point[1])) + Draw.ly) * 400
+            //if(point[1]<0.1)
+            //    point[1] = 0.01
+            let distanceX = Math.sqrt(point[0]*point[0] + point[1]*point[1])
+            let angleX
+            if(point[0]<0)
+                angleX = -Math.acos(point[1]/distanceX)
+            else
+                angleX = Math.acos(point[1]/distanceX)
+            let distanceY = Math.sqrt(point[2]*point[2] + point[1]*point[1])
+            let angleY
+            if(point[1]<0)
+                angleY = Math.acos(point[1]/distanceY)
+            else
+                angleY = -Math.acos(point[1]/distanceY)
+                
+            let aX = Math.tan(angleX) * 400
+            let aY = Math.tan(angleY + Draw.ly) * 400
+            //let aY = Math.tan(Math.atan((point[2])/(point[1])) + Draw.ly) * 400
             dpoly.push([-aX,-aY])
         }
         Draw.drawPoly(dpoly)

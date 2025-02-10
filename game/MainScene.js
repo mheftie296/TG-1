@@ -89,13 +89,17 @@ class MainScene extends Scene{
         MainScene.fy = (y + MainScene.fy*3)/4
         let fx = MainScene.fx
         let fy = MainScene.fy
+        //for (const i in map) {
+        //    for (const j in map[i])
+        //        if(map[i][j] == 1)
+        //            Draw.drawFlat([[i*s+fx,j*s+fy], [i*s+s+fx,j*s+fy], [i*s+s+fx,j*s+s+fy], [i*s+fx,j*s+s+fy]], MainScene.clx, "red")
+        //        else{
+        //            Draw.drawFlat([[i*s+fx,j*s+fy], [i*s+s+fx,j*s+fy], [i*s+s+fx,j*s+s+fy], [i*s+fx,j*s+s+fy]], MainScene.clx, "lightgray")
+        //        }
+        //}
         for (const i in map) {
-            for (const j in map[i])
-                if(map[i][j] == 1)
-                    Draw.drawFlat([[i*s+fx,j*s+fy], [i*s+s+fx,j*s+fy], [i*s+s+fx,j*s+s+fy], [i*s+fx,j*s+s+fy]], MainScene.clx, "red")
-                else{
-                    Draw.drawFlat([[i*s+fx,j*s+fy], [i*s+s+fx,j*s+fy], [i*s+s+fx,j*s+s+fy], [i*s+fx,j*s+s+fy]], MainScene.clx, "lightgray")
-                }
+                for (const j in map[i])
+                    Draw.draw3d(["#333", [i*s+fx,j*s+fy, -1.3], [i*s+s+fx,j*s+fy, -1.3], [i*s+s+fx,j*s+s+fy, -1.3], [i*s+fx,j*s+s+fy, -1.3]])
         }
         for(const poly in MainScene.car){
             Draw.drawTank(MainScene.car[poly], MainScene.tr + MainScene.lx)
