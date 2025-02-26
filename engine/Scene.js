@@ -1,11 +1,11 @@
-class Scene{
-    start(){
-        //override
-    }
-    draw(){
-        //override
-    }
-    update(){
-        //override
-    }
+class Scene {
+  start () {
+    //override
+  }
+  draw () {
+    //override
+  }
+  update () {
+    //override
+  }
 }
