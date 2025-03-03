@@ -2,17 +2,15 @@ class KeyboardMovement extends Component {
     wasd
     cosntructor(){
         super()
-        this.direction = [0,0]
+        this.direction = [0,0,0]
     }
     update() {
         this.direction = [0,0]
         if(Input.keysdown.includes("ArrowLeft")){
-            MainScene.lx += 0.05
-            MainScene.clx += 0.05
+            this.direction[2] = 1
         }
         if(Input.keysdown.includes("ArrowRight")){
-            MainScene.lx -= 0.05
-            MainScene.clx -= 0.05
+            this.direction[2] = -1
         }
         if(Input.keysdown.includes("KeyW")){
             this.direction[0] = 1
