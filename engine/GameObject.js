@@ -4,6 +4,7 @@ class GameObject {
     this.name = name
     this.components = []
     this.addComponent(new Transform())
+    this.transform.y = 0.05
   }
   get transform () {
     return this.components[0]
@@ -19,6 +20,6 @@ class GameObject {
     for (let component of this.components) component.update()
   }
   draw () {
-    for (let component of this.components) component.update()
+    for (let component of this.components) component.draw()
   }
 }

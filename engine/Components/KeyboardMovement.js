@@ -1,7 +1,6 @@
 class KeyboardMovement extends Component {
-    wasd
     cosntructor(){
-        super()
+        //super()
         this.direction = [0,0,0]
     }
     update() {

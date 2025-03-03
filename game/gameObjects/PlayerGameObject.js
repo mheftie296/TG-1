@@ -1,5 +1,13 @@
 class PlayerGameObject extends GameObject{
     start(){
-        this.addComponent(new KeyboardMovement)
+        super.start()
+        //this.addComponent(new KeyboardMovement)
+        this.addComponent(new Model(tank))
+    }
+    update(){
+        super.update()
+    }
+    draw(){
+        super.draw()
     }
 }

@@ -12,8 +12,10 @@ class MainScene extends Scene{
     
     start(){
         MainScene.bullets.push([MainScene.fx, MainScene.fy, MainScene.clx])
+        this.addGameObject(new PlayerGameObject("Player"))
     }
     update(){
+        super.update()
         if(Input.keysdown.includes("ArrowLeft")){
             MainScene.lx += 0.05
             MainScene.clx += 0.05
@@ -48,8 +50,8 @@ class MainScene extends Scene{
         MainScene.inertia -= 0.05
     }
     draw(){
+        super.draw()
         
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
         let x = MainScene.x
         let y = MainScene.y
         let lx = MainScene.lx
@@ -86,7 +88,7 @@ class MainScene extends Scene{
         Draw.drawModel(turret, MainScene.clx, -0, [MainScene.fx+1.6,MainScene.fy + 3,0])
         if(MainScene.spc)
             Draw.draw3d(["#fff9", [-0.2,5,-1.15], [0.2,5,-0.99], [0.2,5,-1.15], [-0.2,5,-0.99]])
-        Draw.drawModel(tank, MainScene.tr + MainScene.lx, 0, [0,0.05,0])
+        //Draw.drawModel(tank, MainScene.tr + MainScene.lx, 0, [0,0.05,0])
         Draw.drawModel(turret, 0, 0, [0,-0.01,0])
         Draw.doDraw()
     }

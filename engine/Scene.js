@@ -1,11 +1,30 @@
 class Scene {
+
+  constructor (backgroundColour = "#000000") {
+    this.backgroundColour = backgroundColour
+    this.started = false
+  }
+  gameObjects = []
   start () {
-    //override
+    this.gameObjects.forEach(gameObject => gameObject.start())
   }
   draw () {
-    //override
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = "White"
+    ctx.beginPath()
+    ctx.rect(0, 0, canvas.width, canvas.height)
+    ctx.fill()
+    this.gameObjects.forEach(gameObject => gameObject.draw())
   }
   update () {
-    //override
+    if(!this.started){
+      this.start()
+      this.started = true
+    }
+    this.gameObjects.forEach(gameObject => gameObject.update())
+  }
+
+  addGameObject (gameObject) {
+    this.gameObjects.push(gameObject)
   }
 }
