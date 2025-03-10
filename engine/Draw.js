@@ -1,6 +1,5 @@
 class Draw{
-    static ly = 0.0
-    static j = 0
+    //static ly = 0.0
     static buffer = []
     static drawPoly(points){
         ctx.beginPath()
@@ -17,7 +16,8 @@ class Draw{
         this.buffer.sort(function(a, b){return a[0] - b[0]})
         this.buffer.reverse()
         for(let point of this.buffer){
-            //point[1][0] = "#"+Math.round(100-(point[0]*5)).toString(16) + "0000"
+            //point[1][0] = "#"+Math.round(100-(point[0]*0.005)).toString(16) + "0000"
+            //console.log((point[0]*0.005))
             Draw.drawPoly(point[1])
         }
         this.buffer = []
@@ -84,7 +84,7 @@ class Draw{
         for (const loc in p) {
             newPoly.push(this.rotate(p[loc][0], p[loc][1], r))
             newPoly[newPoly.length-1][1] += 4
-            newPoly[newPoly.length-1].push(-1.3001 - Draw.j)
+            newPoly[newPoly.length-1].push(-1.3001)
         }
         Draw.draw3d(newPoly)
     }

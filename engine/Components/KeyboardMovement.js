@@ -1,10 +1,11 @@
 class KeyboardMovement extends Component {
+    direction = []
     cosntructor(){
         //super()
         this.direction = [0,0,0]
     }
     update() {
-        this.direction = [0,0]
+        this.direction = [0,0,0]
         if(Input.keysdown.includes("ArrowLeft")){
             this.direction[2] = 1
         }

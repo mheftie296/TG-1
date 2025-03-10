@@ -24,7 +24,11 @@ class Scene {
     this.gameObjects.forEach(gameObject => gameObject.update())
   }
 
-  addGameObject (gameObject) {
+  addGameObject(gameObject, x = 0, y = 0, z = 0, r = 0) {
     this.gameObjects.push(gameObject)
+    gameObject.transform.x = x
+    gameObject.transform.y = y
+    gameObject.transform.z = z
+    gameObject.transform.r = r
   }
 }
