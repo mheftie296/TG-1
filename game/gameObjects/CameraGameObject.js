@@ -16,11 +16,30 @@ class CameraGameObject extends GameObject{
         this.transform.z = z
         this.transform.r = r
     }
+    ccw(A,B,C){
+        return (C[1]-A[1]) * (B[0]-A[0]) > (B[1]-A[1]) * (C[0]-A[0])
+    }
+    inCollision(A,B,C,D){
+        return this.ccw(A,C,D) != this.ccw(B,C,D) && this.ccw(A,B,C) != this.ccw(A,B,D)
+    }
     update(){
         super.update()
         let movement = this.components[1]
         this.transform.y -= movement.direction[0] * Math.cos(-MainScene.tr)*0.1
         this.transform.x -= movement.direction[0] * Math.sin(-MainScene.tr)*0.1
+        let hit = false
+        for (let index = 0; index < tankCollider.length; index++) {
+            let rot1 = this.rotate(tankCollider.at(index-1)[0],tankCollider.at(index-1)[1],-MainScene.tr)
+            let rot2 = this.rotate(tankCollider[index][0], tankCollider[index][1],-MainScene.tr)
+            if(this.inCollision([-1,0], [-1,10], [rot1[0] + this.transform.x, rot1[1] - this.transform.y], [rot2[0] + this.transform.x, rot2[1] - this.transform.y])){
+                hit = true
+            }
+        }
+        if(hit){
+            this.transform.y += movement.direction[0] * Math.cos(-MainScene.tr)*0.1
+            this.transform.x += movement.direction[0] * Math.sin(-MainScene.tr)*0.1
+        }
+        //console.log([this.transform.x, this.transform.y], [this.transform.x+1, this.transform.y+1])
         MainScene.tr -= 0.025 * movement.direction[1]
         this.clx += 0.01 * movement.direction[1]
         this.lx += 0.05 * movement.direction[1]
@@ -50,8 +69,6 @@ class CameraGameObject extends GameObject{
         this.buffer.sort(function(a, b){return a[0] - b[0]})
         this.buffer.reverse()
         for(let point of this.buffer){
-            //point[1][0] = "#"+Math.round(100-(point[0]*0.005)).toString(16) + "0000"
-            //console.log((point[0]*0.005))
             this.drawPoly(point[1])
         }
         this.buffer = []

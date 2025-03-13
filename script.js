@@ -1,6 +1,7 @@
 let canvas
 let ctx
-
+let canvas2
+let ctx2
 function tick(){
     currentScene.update()
     currentScene.draw()
