@@ -5,7 +5,9 @@ class CameraGameObject extends GameObject{
     y = -10
     clx = 0
     tr = 0
+    map
     start(){
+        this.map = new MapGameObject
         this.ly = 0.1
         super.start()
         this.addComponent(new KeyboardMovement)
@@ -28,11 +30,24 @@ class CameraGameObject extends GameObject{
         this.transform.y -= movement.direction[0] * Math.cos(-MainScene.tr)*0.1
         this.transform.x -= movement.direction[0] * Math.sin(-MainScene.tr)*0.1
         let hit = false
+        //for (let index = 0; index < tankCollider.length; index++) {
+        //    let rot1 = this.rotate(tankCollider.at(index-1)[0],tankCollider.at(index-1)[1],-MainScene.tr)
+        //    let rot2 = this.rotate(tankCollider[index][0], tankCollider[index][1],-MainScene.tr)
+        //    if(this.inCollision([-1,0], [-1,10], [rot1[0] + this.transform.x, rot1[1] - this.transform.y], [rot2[0] + this.transform.x, rot2[1] - this.transform.y])){
+        //        hit = true
+        //    }
+        //}
         for (let index = 0; index < tankCollider.length; index++) {
             let rot1 = this.rotate(tankCollider.at(index-1)[0],tankCollider.at(index-1)[1],-MainScene.tr)
             let rot2 = this.rotate(tankCollider[index][0], tankCollider[index][1],-MainScene.tr)
-            if(this.inCollision([-1,0], [-1,10], [rot1[0] + this.transform.x, rot1[1] - this.transform.y], [rot2[0] + this.transform.x, rot2[1] - this.transform.y])){
-                hit = true
+            for(let collider of this.map.getColliders()){
+                for(let i = collider[2].length-1; i>-1; i--){
+                    let line = [collider[2].at(i-1), collider[2].at(i)]
+                    console.log(line)
+                    if(this.inCollision(line[0], line[1], [rot1[0] + this.transform.x, rot1[1] - this.transform.y], [rot2[0] + this.transform.x, rot2[1] - this.transform.y])){
+                        hit = true
+                    }
+                }
             }
         }
         if(hit){
