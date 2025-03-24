@@ -6,6 +6,8 @@ class CameraGameObject extends GameObject{
     clx = 0
     tr = 0
     map
+    // all this location information should be in the transform component of the player, pull from Engine.currentScene.findGameObject("Player Game Object").transform
+    // the view buffer can stay in the camera but the drawing should be done in the static Draw class
     start(){
         this.map = new MapGameObject
         this.ly = 0.1

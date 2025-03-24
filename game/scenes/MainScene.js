@@ -21,6 +21,7 @@ class MainScene extends Scene{
         //this.map = this.gameObjects[2]
         super.start()
         //this.gameObjects[1].map = this.gameObjects[2]
+ 
     }
     update(){
         super.update()
