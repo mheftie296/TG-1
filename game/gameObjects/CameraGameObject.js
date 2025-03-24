@@ -6,25 +6,20 @@ class CameraGameObject extends GameObject{
     clx = 0
     tr = 0
     map
-    // all this location information should be in the transform component of the player, pull from Engine.currentScene.findGameObject("Player Game Object").transform
-    // the view buffer can stay in the camera but the drawing should be done in the static Draw class
     start(){
         this.map = new MapGameObject
         this.ly = 0.1
         super.start()
         this.addComponent(new KeyboardMovement)
+        this.addComponent(new Model(tank))
+        this.transform.x = -10.0001
+        this.transform.y = -10
     }
     updateLocation(x, y, z, r){
         this.transform.x = x
         this.transform.y = y
         this.transform.z = z
         this.transform.r = r
-    }
-    ccw(A,B,C){
-        return (C[1]-A[1]) * (B[0]-A[0]) > (B[1]-A[1]) * (C[0]-A[0])
-    }
-    inCollision(A,B,C,D){
-        return this.ccw(A,C,D) != this.ccw(B,C,D) && this.ccw(A,B,C) != this.ccw(A,B,D)
     }
     update(){
         super.update()
@@ -46,7 +41,7 @@ class CameraGameObject extends GameObject{
                 for(let i = collider[2].length-1; i>-1; i--){
                     let line = [collider[2].at(i-1), collider[2].at(i)]
                     console.log(line)
-                    if(this.inCollision(line[0], line[1], [rot1[0] + this.transform.x, rot1[1] - this.transform.y], [rot2[0] + this.transform.x, rot2[1] - this.transform.y])){
+                    if(Collisions.inCollision(line[0], line[1], [rot1[0] + this.transform.x, rot1[1] - this.transform.y], [rot2[0] + this.transform.x, rot2[1] - this.transform.y])){
                         hit = true
                     }
                 }
@@ -71,6 +66,7 @@ class CameraGameObject extends GameObject{
             MainScene.spc = true
         }
         if(!Input.keysdown.includes("Space")){MainScene.spc = false}
+        Draw.updateCameraLocation(this.transform.x,this.transform.y,this.transform.z,this.clx)
     }
     drawPoly(points){
         ctx.beginPath()

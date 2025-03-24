@@ -2,7 +2,7 @@ class MainScene extends Scene{
     static lx = 0
     static x = -10.01
     static y = -10
-    static tr = 0
+    static tr = 0 // tank body rotation
     static fx = -10.01
     static fy = -10
     static clx = 0
@@ -19,6 +19,7 @@ class MainScene extends Scene{
         this.camera = this.gameObjects[1]
         //this.addGameObject(new MapGameObject)
         //this.map = this.gameObjects[2]
+        //this.addGameObject(new PlayerGameObject)
         super.start()
         //this.gameObjects[1].map = this.gameObjects[2]
  
@@ -56,25 +57,14 @@ class MainScene extends Scene{
             this.camera.drawModel(bulletm, -bullet[2], [bx,by,0])
             
         }
-        this.camera.drawModel(tank, 0, [1.6,3.05,0])
+        Draw.drawModel(tank, 0, [1.6,3.05,0])
         //console.log(this.gameObjects)
-        this.camera.drawModel(turret, -0, [1.6,3,0])
+        Draw.drawModel(turret, -0, [1.6,3,0])
         if(MainScene.spc)
             this.camera.draw3d(["#fff9", [-0.195,5,-1.15], [0.2,5,-0.99], [0.195,5,-1.15], [-0.2,5,-0.99]])
         this.camera.drawModelFixed(tank, MainScene.tr + MainScene.lx, [0,0.0001,0])
         this.camera.drawModelFixed(turret, 0, [0,0.0001,0])
         this.gameObjects[1].doDraw()
-        //ctx.beginPath();
-        //for (let index = 0; index < tankCollider.length; index++) {
-        //    let rot1 = this.camera.rotate(tankCollider.at(index-1)[0]*5,tankCollider.at(index-1)[1]*5,-MainScene.tr)
-        //    let rot2 = this.camera.rotate(tankCollider[index][0]*5, tankCollider[index][1]*5,-MainScene.tr)
-        //    ctx.moveTo(rot1[0] + 100  + this.camera.transform.x*5, rot1[1] + 100 - this.camera.transform.y*5);
-        //    ctx.lineTo(rot2[0] + 100  + this.camera.transform.x*5, rot2[1] + 100 - this.camera.transform.y*5);
-        //}
-        //ctx.moveTo(100 - 1*5, 100);
-        //ctx.lineTo(100 - 1*5, 150);
-        //ctx.lineWidth = 0.3;
-        //ctx.strokeStyle = 'magenta';
-        //ctx.stroke();
+        Draw.doDraw()
     }
 }

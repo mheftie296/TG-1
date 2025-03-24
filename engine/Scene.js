@@ -10,10 +10,10 @@ class Scene {
   }
   draw () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.fillStyle = "White"
-    ctx.beginPath()
-    ctx.rect(0, 0, canvas.width, canvas.height)
-    ctx.fill()
+    //ctx.fillStyle = "White"
+    //ctx.beginPath()
+    //ctx.rect(0, 0, canvas.width, canvas.height)
+    //ctx.fill()
     this.gameObjects.forEach(gameObject => gameObject.draw())
   }
   update () {

@@ -1,6 +1,12 @@
 class Draw{
-    //static ly = 0.0
     static buffer = []
+    static cameraLocation = [0,0,0,0,0.1]
+    static updateCameraLocation(x, y, z, r){
+        this.cameraLocation[0] = x
+        this.cameraLocation[1] = y
+        this.cameraLocation[2] = z
+        this.cameraLocation[3] = r
+    }
     static drawPoly(points){
         ctx.beginPath()
         ctx.fillStyle = points[0]
@@ -12,13 +18,10 @@ class Draw{
     }
     static doDraw(){
         //https://www.w3schools.com/js/js_array_sort.asp
-        
         this.buffer.sort(function(a, b){return a[0] - b[0]})
         this.buffer.reverse()
         for(let point of this.buffer){
-            //point[1][0] = "#"+Math.round(100-(point[0]*0.005)).toString(16) + "0000"
-            //console.log((point[0]*0.005))
-            Draw.drawPoly(point[1])
+            this.drawPoly(point[1])
         }
         this.buffer = []
     }
@@ -43,7 +46,7 @@ class Draw{
             if(point[1]<0.1)
                 point[1] = 0.01
             let aX = Math.tan(Math.atan((point[0])/(point[1]))) * 400
-            let aY = Math.tan(Math.atan((point[2])/(point[1])) + Draw.ly) * 400
+            let aY = Math.tan(Math.atan((point[2])/(point[1])) + this.ly) * 400
             dpoly.push([-aX,-aY])
         }
         //console.log(dist.sort()[0])
@@ -51,24 +54,6 @@ class Draw{
         //console.log(d)
         this.buffer.push([d, dpoly])
         //Draw.drawPoly(dpoly)
-    }
-    static drawTank(poly, r){
-        let newPoly = [poly[0]]
-        for (const loc of poly.slice(1)) {
-            newPoly.push(this.rotate(loc[0], loc[1], r))
-            newPoly[newPoly.length-1][1] += 4
-            newPoly[newPoly.length-1].push(loc[2])
-        }
-        Draw.draw3d(newPoly)
-    }
-    static drawTank2(poly, r){
-        let newPoly = [poly[0]]
-        for (const loc of poly.slice(1)) {
-            newPoly.push(this.rotate(loc[0], loc[1]-4, r))
-            newPoly[newPoly.length-1][1] += 4
-            newPoly[newPoly.length-1].push(loc[2])
-        }
-        Draw.draw3d(newPoly)
     }
     static rotate(x, y, a){
         let distance = Math.sqrt(y*y+x*x)
@@ -79,38 +64,36 @@ class Draw{
             angle = Math.acos(x/distance) + a
         return [Math.cos(angle) * distance, Math.sin(angle) * distance]
     }
-    static drawFlat(p, r, c){
-        let newPoly = [c]
-        for (const loc in p) {
-            newPoly.push(this.rotate(p[loc][0], p[loc][1], r))
-            newPoly[newPoly.length-1][1] += 4
-            newPoly[newPoly.length-1].push(-1.3001)
-        }
-        Draw.draw3d(newPoly)
-    }
-    static drawModel(model, r1, r2, location){
-        let loca = this.rotate(location[0], location[1], r1)
+    static drawModel(model, r, location){
+        let x = location[0] + this.cameraLocation[0]
+        let y = location[1] + this.cameraLocation[1]
+        let z = location[2] + this.cameraLocation[2]
+        let loca = this.rotate(x, y, this.cameraLocation[3])
         for(const poly of model){
             let newPoly = [poly[0]]
             for (const loc of poly.slice(1)) {
-                newPoly.push(this.rotate(loc[0], loc[1], r1 + r2))
+                newPoly.push(this.rotate(loc[0], loc[1], this.cameraLocation[3] + r))
                 newPoly[newPoly.length-1][0] += loca[0]
                 newPoly[newPoly.length-1][1] += 4 + loca[1]
-                newPoly[newPoly.length-1].push(loc[2] + location[2])
+                newPoly[newPoly.length-1].push(loc[2] + z)
             }
-            Draw.draw3d(newPoly)
+            this.draw3d(newPoly)
         }
     }
-    static drawFlat2(p, r, c){
-        let newPoly = [c]
-        for (const loc in p) {
-            newPoly.push(this.rotate(p[loc][0], p[loc][1], r))
-            newPoly[newPoly.length-1][1] += 6
-            newPoly[newPoly.length-1].push(p[loc][2])
+    static drawModelFixed(model, r, location){
+        let x = location[0]// + this.transform.x
+        let y = location[1]// + this.transform.y
+        let z = location[2]// + this.transform.z
+        let loca = this.rotate(x, y, 0)
+        for(const poly of model){
+            let newPoly = [poly[0]]
+            for (const loc of poly.slice(1)) {
+                newPoly.push(this.rotate(loc[0], loc[1], 0 + r))
+                newPoly[newPoly.length-1][0] += loca[0]
+                newPoly[newPoly.length-1][1] += 4 + loca[1]
+                newPoly[newPoly.length-1].push(loc[2] + z)
+            }
+            this.draw3d(newPoly)
         }
-        Draw.draw3d(newPoly)
-    }
-    static setY(y){
-        this.ly = y
     }
 }

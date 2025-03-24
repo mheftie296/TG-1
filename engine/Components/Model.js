@@ -1,4 +1,4 @@
-class DModel extends Component {
+class Model extends Component {
     model
     constructor(model){
         super()
