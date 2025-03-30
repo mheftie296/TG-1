@@ -5,6 +5,6 @@ class Model extends Component {
         this.model = model
     }
     draw(){
-        Draw.drawModel(this.model, this.transform.r, 0, [this.transform.x, this.transform.y, this.transform.z])
+        Draw.drawModel(this.model, this.transform.r, [this.transform.x, this.transform.y, this.transform.z])
     }
 }

@@ -1,6 +1,6 @@
 class Scene {
 
-  constructor (backgroundColour = "#000000") {
+  constructor (backgroundColour = "#87CEEB") {
     this.backgroundColour = backgroundColour
     this.started = false
   }
@@ -10,10 +10,10 @@ class Scene {
   }
   draw () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    //ctx.fillStyle = "White"
-    //ctx.beginPath()
-    //ctx.rect(0, 0, canvas.width, canvas.height)
-    //ctx.fill()
+    ctx.fillStyle = this.backgroundColour
+    ctx.beginPath()
+    ctx.rect(0, 0, canvas.width, canvas.height)
+    ctx.fill()
     this.gameObjects.forEach(gameObject => gameObject.draw())
   }
   update () {

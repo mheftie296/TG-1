@@ -31,6 +31,7 @@ class Draw{
         let height = 0
         dpoly.push(poly[0])
         let draw = false
+        //.log(poly[0], poly[1], poly[2])
         for (const point of poly.slice(1)){
             if(point[1]>0.1){
                 draw = true
@@ -38,7 +39,7 @@ class Draw{
             }
         }
         if(!draw){
-            return
+            //return
         }
         for (const point of poly.slice(1)) {
             dist += (Math.sqrt(point[0]**2 + point[1]**2))
@@ -65,14 +66,14 @@ class Draw{
         return [Math.cos(angle) * distance, Math.sin(angle) * distance]
     }
     static drawModel(model, r, location){
-        let x = location[0] + this.cameraLocation[0]
-        let y = location[1] + this.cameraLocation[1]
-        let z = location[2] + this.cameraLocation[2]
-        let loca = this.rotate(x, y, this.cameraLocation[3])
+        let x = location[0] + MainScene.x
+        let y = location[1] + MainScene.y //this.cameraLocation[1]
+        let z = location[2] + -1.30//MainScene.z //this.cameraLocation[2]
+        let loca = this.rotate(x, y, MainScene.clx)
         for(const poly of model){
             let newPoly = [poly[0]]
             for (const loc of poly.slice(1)) {
-                newPoly.push(this.rotate(loc[0], loc[1], this.cameraLocation[3] + r))
+                newPoly.push(this.rotate(loc[0], loc[1], MainScene.clx + r))
                 newPoly[newPoly.length-1][0] += loca[0]
                 newPoly[newPoly.length-1][1] += 4 + loca[1]
                 newPoly[newPoly.length-1].push(loc[2] + z)

@@ -57,14 +57,13 @@ class MainScene extends Scene{
             this.camera.drawModel(bulletm, -bullet[2], [bx,by,0])
             
         }
-        Draw.drawModel(tank, 0, [1.6,3.05,0])
+        this.camera.drawModel(tank, 0, [1.6,3.05,0])
         //console.log(this.gameObjects)
-        Draw.drawModel(turret, -0, [1.6,3,0])
+        this.camera.drawModel(turret, -0, [1.6,3,0])
         if(MainScene.spc)
             this.camera.draw3d(["#fff9", [-0.195,5,-1.15], [0.2,5,-0.99], [0.195,5,-1.15], [-0.2,5,-0.99]])
         this.camera.drawModelFixed(tank, MainScene.tr + MainScene.lx, [0,0.0001,0])
         this.camera.drawModelFixed(turret, 0, [0,0.0001,0])
         this.gameObjects[1].doDraw()
-        Draw.doDraw()
     }
 }
