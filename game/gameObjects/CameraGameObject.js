@@ -8,7 +8,6 @@ class CameraGameObject extends GameObject{
     map
     slider
     start(){
-        this.slider = document.getElementById("volume");
         this.map = new MapGameObject
         this.ly = 0.1
         super.start()

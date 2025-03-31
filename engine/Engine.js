@@ -19,7 +19,7 @@ class Engine{
         window.addEventListener("mouseup", Input.mouseUp)
         window.addEventListener("wheel", Input.mouseWheel)
 
-        canvas = document.getElementById("gameCanvas")
+        canvas = document.getElementById("canvas")
         ctx = canvas.getContext("2d")
     }
     static start(){

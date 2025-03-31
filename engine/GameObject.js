@@ -5,6 +5,7 @@ class GameObject {
     this.components = []
     this.addComponent(new Transform())
     this.transform.y = 0.05
+    this.markForDelete = false
   }
   get transform () {
     return this.components[0]
@@ -21,5 +22,22 @@ class GameObject {
   }
   draw () {
     for (let component of this.components) component.draw()
+  }
+  destroy(){
+    this.markForDelete = true
+  }
+  findComponent(classType){
+    for(let component of this.components){
+      if(component instanceof classType)
+        return component
+    }
+  }
+  findComponents(classType){
+    let toReturn = []
+    for(let component of this.components){
+      if(component instanceof classType)
+        toReturn.push(component)
+    }
+    return toReturn
   }
 }
