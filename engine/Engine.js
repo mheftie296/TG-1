@@ -9,7 +9,7 @@ class Engine{
         }
         Engine.currentScene.update()
         Engine.currentScene.draw()
-        Input.update()
+        //Input.update()
     }
     static setup(){
         window.addEventListener("keydown", Input.keyDown)
@@ -24,5 +24,6 @@ class Engine{
     }
     static start(){
         Engine.setup()
+        setInterval(Engine.tick, Time.msBetweenFrames) // I never called this thats why it was never working
     }
 }

@@ -13,6 +13,7 @@ class MainScene extends Scene{
     //static map
     
     start(){
+        console.log("MainScene")
         this.bullets.push([this.fx, this.fy, this.clx])
         //this.addGameObject(new PlayerGameObject("Player"))
         this.addGameObject(new CameraGameObject())
@@ -39,12 +40,12 @@ class MainScene extends Scene{
         for (const i in map) {
             for (const j in map[i]){
                 if(map[i][j] == 1)
-                    this.camera.drawModel(floor, 0, [i*1,j*1,-1.31])
+                    Draw.drawModel(floor, 0, [i*1,j*1,-1.31])
                 else if(map[i][j] == 0){
-                    this.camera.drawModel(floor2, 0, [i*1,j*1,-1.31])
+                    Draw.drawModel(floor2, 0, [i*1,j*1,-1.31])
                 } 
                 else {
-                    this.camera.drawModel(box2, 0, [i*1,j*1,-1.31])
+                    Draw.drawModel(box2, 0, [i*1,j*1,-1.31])
                 }
                 
             }
@@ -54,16 +55,16 @@ class MainScene extends Scene{
             bullet[0]+=Math.sin(-bullet[2])
             let bx = -bullet[0]
             let by = -bullet[1]
-            this.camera.drawModel(bulletm, -bullet[2], [bx,by,0])
+            //Draw.drawModel(bulletm, -bullet[2], [bx,by,0])
             
         }
-        this.camera.drawModel(tank, 0, [1.6,3.05,0])
+        Draw.drawModel(tank, 0, [1.6,3.05,0])
         //console.log(this.gameObjects)
-        this.camera.drawModel(turret, -0, [1.6,3,0])
+        //this.camera.drawModel(turret, -0, [1.6,3,0])
         if(this.spc)
             this.camera.draw3d(["#fff9", [-0.195,5,-1.15], [0.2,5,-0.99], [0.195,5,-1.15], [-0.2,5,-0.99]])
-        this.camera.drawModelFixed(tank, this.tr + this.lx, [0,0.0001,0])
-        this.camera.drawModelFixed(turret, 0, [0,0.0001,0])
-        this.gameObjects[1].doDraw()
+        //Draw.drawModelFixed(tank, this.tr + this.lx, [0,0.0001,0])
+        //Draw.drawModelFixed(turret, 0, [0,0.0001,0])
+        Draw.doDraw()
     }
 }

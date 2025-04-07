@@ -39,15 +39,15 @@ class Draw{
             }
         }
         if(!draw){
-            //return
+            return
         }
         for (const point of poly.slice(1)) {
             dist += (Math.sqrt(point[0]**2 + point[1]**2))
             height += point[2]
             if(point[1]<0.1)
                 point[1] = 0.01
-            let aX = Math.tan(Math.atan((point[0])/(point[1]))) * 400
-            let aY = Math.tan(Math.atan((point[2])/(point[1])) + this.ly) * 400
+            let aX = (point[0]/point[1]) * 400
+            let aY = (point[2]/point[1]) * 400 + 30 //Math.tan(Math.atan((point[2])/(point[1])) + this.ly) * 400
             dpoly.push([-aX,-aY])
         }
         //console.log(dist.sort()[0])
