@@ -1,10 +1,10 @@
 class MainScene extends Scene{
     lx = 0
-    x = -10.01
-    y = -10
+    x = 0.01
+    y = 0
     tr = 0 // tank body rotation
-    fx = -10.01
-    fy = -10
+    fx = 0.01
+    fy = 0
     clx = 0
     spc = false
     bullets = []
@@ -13,14 +13,13 @@ class MainScene extends Scene{
     //static map
     
     start(){
-        console.log("MainScene")
         this.bullets.push([this.fx, this.fy, this.clx])
         //this.addGameObject(new PlayerGameObject("Player"))
         this.addGameObject(new CameraGameObject())
-        this.camera = this.gameObjects[1]
+        //this.camera = this.gameObjects[1]
         //this.addGameObject(new MapGameObject)
         //this.map = this.gameObjects[2]
-        //this.addGameObject(new PlayerGameObject)
+        this.addGameObject(new PlayerGameObject)
         super.start()
         //this.gameObjects[1].map = this.gameObjects[2]
  
@@ -55,14 +54,14 @@ class MainScene extends Scene{
             bullet[0]+=Math.sin(-bullet[2])
             let bx = -bullet[0]
             let by = -bullet[1]
-            //Draw.drawModel(bulletm, -bullet[2], [bx,by,0])
+            Draw.drawModel(bulletm, -bullet[2], [bx,by,0])
             
         }
         Draw.drawModel(tank, 0, [1.6,3.05,0])
         //console.log(this.gameObjects)
-        //this.camera.drawModel(turret, -0, [1.6,3,0])
+        Draw.drawModel(turret, -0, [1.6,3,0])
         if(this.spc)
-            this.camera.draw3d(["#fff9", [-0.195,5,-1.15], [0.2,5,-0.99], [0.195,5,-1.15], [-0.2,5,-0.99]])
+            Draw.draw3d(["#fff9", [-0.195,5,-1.15], [0.2,5,-0.99], [0.195,5,-1.15], [-0.2,5,-0.99]])
         //Draw.drawModelFixed(tank, this.tr + this.lx, [0,0.0001,0])
         //Draw.drawModelFixed(turret, 0, [0,0.0001,0])
         Draw.doDraw()

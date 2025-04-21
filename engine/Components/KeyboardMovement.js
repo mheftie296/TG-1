@@ -24,9 +24,5 @@ class KeyboardMovement extends Component {
         if(Input.keysdown.includes("KeyD")){
             this.direction[1] = -1
         }
-        if(Input.keysdown.includes("Space") && !MainScene.spc){
-            MainScene.bullets.push([MainScene.fx, MainScene.fy, MainScene.clx])
-            MainScene.spc = true
-        }
     }
 }

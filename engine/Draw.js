@@ -66,10 +66,10 @@ class Draw{
         return [Math.cos(angle) * distance, Math.sin(angle) * distance]
     }
     static drawModel(model, r, location){
-        let x = location[0] + MainScene.x
-        let y = location[1] + MainScene.y //this.cameraLocation[1]
-        let z = location[2] + -1.30//MainScene.z //this.cameraLocation[2]
-        let loca = this.rotate(x, y, MainScene.clx)
+        let x = location[0] + this.cameraLocation[0]
+        let y = location[1] + this.cameraLocation[1]
+        let z = location[2] + this.cameraLocation[2]
+        let loca = this.rotate(x, y, this.cameraLocation[3])//MainScene.clx)
         for(const poly of model){
             let newPoly = [poly[0]]
             for (const loc of poly.slice(1)) {
