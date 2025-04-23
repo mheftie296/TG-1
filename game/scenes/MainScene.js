@@ -20,6 +20,7 @@ class MainScene extends Scene{
         //this.addGameObject(new MapGameObject)
         //this.map = this.gameObjects[2]
         this.addGameObject(new PlayerGameObject)
+        this.addGameObject(new EnemyGameObject([-1.6,-3]))
         super.start()
         //this.gameObjects[1].map = this.gameObjects[2]
  
@@ -57,9 +58,9 @@ class MainScene extends Scene{
             Draw.drawModel(bulletm, -bullet[2], [bx,by,0])
             
         }
-        Draw.drawModel(tank, 0, [1.6,3.05,0])
+        //Draw.drawModel(tank, 0, [1.6,3.05,0])
         //console.log(this.gameObjects)
-        Draw.drawModel(turret, -0, [1.6,3,0])
+        //Draw.drawModel(turret, -0, [1.6,3,0])
         if(this.spc)
             Draw.draw3d(["#fff9", [-0.195,5,-1.15], [0.2,5,-0.99], [0.195,5,-1.15], [-0.2,5,-0.99]])
         //Draw.drawModelFixed(tank, this.tr + this.lx, [0,0.0001,0])
