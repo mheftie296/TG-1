@@ -87,20 +87,4 @@ class Draw{
             this.draw3d(newPoly)
         }
     }
-    static drawModelFixed(model, r, location){
-        let x = location[0]// + this.transform.x
-        let y = location[1]// + this.transform.y
-        let z = location[2]// + this.transform.z
-        let loca = this.rotate(x, y, 0)
-        for(const poly of model){
-            let newPoly = [poly[0]]
-            for (const loc of poly.slice(1)) {
-                newPoly.push(this.rotate(loc[0], loc[1], 0 + r))
-                newPoly[newPoly.length-1][0] += loca[0]
-                newPoly[newPoly.length-1][1] += 4 + loca[1]
-                newPoly[newPoly.length-1].push(loc[2] + z)
-            }
-            this.draw3d(newPoly)
-        }
-    }
 }
