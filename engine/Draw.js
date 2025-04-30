@@ -7,21 +7,27 @@ class Draw{
         this.cameraLocation[2] = z
         this.cameraLocation[3] = r
     }
-    static drawPoly(points){
+    static drawPoly(points, distance){
         ctx.beginPath()
         ctx.fillStyle = points[0]
         ctx.moveTo(points[1][0] + 200, points[1][1] + 120)
         for (let index = 2; index < points.length; index++) {
             ctx.lineTo(points[index][0] + 200, points[index][1] + 120)
         }
+        ctx.lineTo(points[1][0] + 200, points[1][1] + 120)
+        ctx.lineWidth = 0.5/distance
+        if(!(points[0].startsWith('#') && (points[0].length === 5 || points[0].length === 9)))
+        ctx.stroke()
         ctx.fill()
     }
     static doDraw(){
+        ctx.lineWidth = 0.1;
+        ctx.strokeStyle = "Black"
         //https://www.w3schools.com/js/js_array_sort.asp
         this.buffer.sort(function(a, b){return a[0] - b[0]})
         this.buffer.reverse()
         for(let point of this.buffer){
-            this.drawPoly(point[1])
+            this.drawPoly(point[1], point[2])
         }
         this.buffer = []
     }
@@ -53,7 +59,7 @@ class Draw{
         //console.log(dist.sort()[0])
         let d = dist/poly.length + -20000 * height/poly.length
         //console.log(d)
-        this.buffer.push([d, dpoly])
+        this.buffer.push([d, dpoly, dist/poly.length])
         //Draw.drawPoly(dpoly)
     }
     static rotate(x, y, a){
