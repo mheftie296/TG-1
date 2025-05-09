@@ -17,7 +17,7 @@ class Draw{
         ctx.lineTo(points[1][0] + 200, points[1][1] + 120)
         ctx.lineWidth = 0.5/distance
         if(!(points[0].startsWith('#') && (points[0].length === 5 || points[0].length === 9)))
-        ctx.stroke()
+        //ctx.stroke()
         ctx.fill()
     }
     static doDraw(){

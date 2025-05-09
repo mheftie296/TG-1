@@ -1,4 +1,4 @@
-class Transform extends Component{
+class Transform extends Component {
     x
     y
     z
