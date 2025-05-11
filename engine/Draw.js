@@ -1,6 +1,7 @@
 class Draw{
     static buffer = []
     static cameraLocation = [0,0,0,0,0.1]
+    static clx = 0
     static updateCameraLocation(x, y, z, r){
         this.cameraLocation[0] = x
         this.cameraLocation[1] = y
@@ -10,14 +11,16 @@ class Draw{
     static drawPoly(points, distance){
         ctx.beginPath()
         ctx.fillStyle = points[0]
-        ctx.moveTo(points[1][0] + 200, points[1][1] + 120)
+        let centerX = canvas.width/2
+        let centerY = canvas.height/2
+        ctx.moveTo(points[1][0] + centerX, points[1][1] + centerY)
         for (let index = 2; index < points.length; index++) {
-            ctx.lineTo(points[index][0] + 200, points[index][1] + 120)
+            ctx.lineTo(points[index][0] + centerX, points[index][1] + centerY)
         }
-        ctx.lineTo(points[1][0] + 200, points[1][1] + 120)
+        ctx.lineTo(points[1][0] + centerX, points[1][1] + centerY)
         ctx.lineWidth = 0.5/distance
         if(!(points[0].startsWith('#') && (points[0].length === 5 || points[0].length === 9)))
-        //ctx.stroke()
+        ctx.stroke()
         ctx.fill()
     }
     static doDraw(){
@@ -52,8 +55,8 @@ class Draw{
             height += point[2]
             if(point[1]<0.1)
                 point[1] = 0.01
-            let aX = (point[0]/point[1]) * 400
-            let aY = (point[2]/point[1]) * 400 + 30 //Math.tan(Math.atan((point[2])/(point[1])) + this.ly) * 400
+            let aX = (point[0]/point[1]) * 400 * Camera.getScale()
+            let aY = (point[2]/point[1]) * 400 * Camera.getScale() + 30 * Camera.getScale()
             dpoly.push([-aX,-aY])
         }
         //console.log(dist.sort()[0])
@@ -79,7 +82,7 @@ class Draw{
         for(const poly of model){
             let newPoly = [poly[0]]
             for (const loc of poly.slice(1)) {
-                newPoly.push(this.rotate(loc[0], loc[1], MainScene.clx + r))
+                newPoly.push(this.rotate(loc[0], loc[1], this.clx + r))
                 newPoly[newPoly.length-1][0] += loca[0]
                 newPoly[newPoly.length-1][1] += 4 + loca[1]
                 newPoly[newPoly.length-1].push(loc[2] + z)

@@ -9,6 +9,8 @@ class Engine{
             Engine.currentScene = Engine.nextScene
             Engine.nextScene = null
         }
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
         Engine.currentScene.update()
         Engine.currentScene.draw()
         //Input.update()

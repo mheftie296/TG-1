@@ -1,9 +1,7 @@
 class EnemyGameObject extends GameObject{
     tr
-    constructor(offset){
+    constructor(){
         super()
-        this.transform.x = offset[0]
-        this.transform.y = offset[1]
     }    
     start(){
         this.tr = 0
