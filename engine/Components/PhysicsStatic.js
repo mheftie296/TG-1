@@ -1,1 +1,1 @@
-class PhysicsStatic extends Comment{}
+class PhysicsStatic extends Component{}

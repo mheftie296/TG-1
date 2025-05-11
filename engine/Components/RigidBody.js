@@ -1,4 +1,4 @@
-class Rigidbody extends Comment {
+class RigidBody extends Component{
     constructor(gravity = 0){
         super()
         this.gravity = gravity

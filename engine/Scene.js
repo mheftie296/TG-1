@@ -11,7 +11,6 @@ class Scene {
     this.gameObjects.forEach(gameObject => gameObject.start())
   }
   draw () {
-    
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     ctx.fillStyle = this.backgroundColour
     ctx.beginPath()
@@ -42,6 +41,7 @@ class Scene {
       this.start()
       this.started = true
     }
+    this.gameObjects.filter(g => !g.started).forEach(g => {g.start(); g.started = true;})
     this.gameObjects.forEach(gameObject => gameObject.update())
   }
 

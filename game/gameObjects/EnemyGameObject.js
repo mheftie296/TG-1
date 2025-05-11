@@ -7,6 +7,8 @@ class EnemyGameObject extends GameObject{
         this.tr = 0
         this.addComponent(new Model(turret))
         this.addComponent(new TankBody())
+        this.addComponent(new Collider(tankCollider))
+        this.addComponent(new PhysicsStatic())
         super.start()
     }
     update(){

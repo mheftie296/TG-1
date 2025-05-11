@@ -19,7 +19,25 @@ class Physics{
 
     static resolvePrecise(movingStartTransform, movingEndGameObject, obstacleGameObject, maxSteps = 50){
         let offset = new Vector2(movingEndGameObject.transform.x - movingStartTransform.x, movingEndGameObject.transform.y - movingStartTransform.y)
-
+        if(!Collisions.inCollision(movingEndGameObject, obstacleGameObject))
+            return false
+        movingEndGameObject.transform.x = movingStartTransform.x
+        movingEndGameObject.transform.y = movingStartTransform.y
+        if(Collisions.inCollision(movingEndGameObject, obstacleGameObject))
+            return true
+        let lastNonCollision = 0
+        let lastCollision = 1
+        let nextGuess = (lastCollision + lastNonCollision)/2
+        for (let i = 0; i < maxSteps; i++) {
+            movingEndGameObject.transform.x = movingStartTransform.x + offset.x * nextGuess
+            movingEndGameObject.transform.y = movingStartTransform.y + offset.y * nextGuess
+            if(Collisions.inCollision(movingEndGameObject, obstacleGameObject)){lastCollision = nextGuess}
+            else{lastCollision=nextGuess}
+            nextGuess = (lastCollision + lastNonCollision)/2
+        }
+        movingEndGameObject.transform.x = movingStartTransform.x + offset.x * lastNonCollision
+        movingEndGameObject.transform.y = movingStartTransform.y + offset.y * lastNonCollision
+        return true
     }
 
     static findNearestCollisionTime(movingStartTransform, movingEndGameObject, obstacleGameObjects, maxSteps = 50){
