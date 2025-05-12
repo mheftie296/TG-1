@@ -14,5 +14,6 @@ class EnemyGameObject extends GameObject{
     update(){
         super.update()
         this.findComponent(TankBody).tr = this.tr
+        this.findComponent(Collider).r = this.findComponent(Transform).r + this.tr
     }
 }

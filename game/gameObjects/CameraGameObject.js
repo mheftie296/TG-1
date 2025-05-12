@@ -23,21 +23,6 @@ class CameraGameObject extends GameObject{
     update(){
         super.update()
         let movement = this.components[1]
-        this.transform.y -= movement.direction[0] * Math.cos(this.tr)*0.1
-        this.transform.x -= movement.direction[0] * Math.sin(this.tr)*0.1
-        this.clx += 0.01 * movement.direction[1]
-        this.lx += 0.05 * movement.direction[1]
-        this.tr += 0.05 * movement.direction[1]
-        this.clx += 0.05 * movement.direction[2]
-        this.lx += 0.05 * movement.direction[2]
-        this.clx = (this.lx + this.clx*3)/4
-        Draw.clx = this.clx
-        this.transform.r = this.clx
-        //if(Input.keysdown.includes("Space") && !MainScene.spc){
-        //    MainScene.bullets.push([MainScene.fx, MainScene.fy, MainScene.clx])
-        //    MainScene.spc = true
-        //}
-        if(!Input.keysdown.includes("Space")){MainScene.spc = false}
-        Draw.updateCameraLocation(this.transform.x,this.transform.y,this.transform.z,this.clx)
+        
     }
 }

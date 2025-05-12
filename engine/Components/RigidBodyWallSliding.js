@@ -16,6 +16,8 @@ class RigidBodyWallSliding extends RigidBody {
             let [minDistance, minObstacle, minFinalLocation] = Physics.findNearestCollisionTime(originalPosition, this.parent, physicsStatics)
             this.transform.position = minFinalLocation
             if(!minObstacle) break
+            this.transform.position = originalPosition
+            break
             let line2 = Line2.fromGameObject(minObstacle)
             let circleCenter = Vector2.fromGameObject(this.parent)
             let closestPoint = Collisions.findClosestPointOnLineSegment(circleCenter, line2.point1, line2.point2)
